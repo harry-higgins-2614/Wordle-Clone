@@ -5,7 +5,7 @@ export const useStore = defineStore('main', {
     state: () => { 
         return { 
             usedLetters: [],
-            word: "HELLS"
+            word: "PEARL"
         }
     }
 })
