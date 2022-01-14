@@ -3,9 +3,8 @@ import {getWord } from "./WordService"
 
 export const useStore = defineStore('main', { 
 
-    state: async () => {
+    state: () => {
         const word = getWord();
-        
         console.log(word);
         return { 
             usedLetters: [],

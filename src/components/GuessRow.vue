@@ -32,8 +32,8 @@ export default {
             this.$emit('locked',  this.guess.join(""));
             this.status = [];
 
-            const word = await this.word;
-
+            const word = this.word;
+            console.log(word, this.word);
             this.guess.forEach((letter, index) => { 
                 
                 console.log(word)
