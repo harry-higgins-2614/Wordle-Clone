@@ -10,7 +10,7 @@
     "axios": "^0.24.0",
     "pinia": "^2.0.9",
     "vue": "^3.2.26",
-    "vue-confetti": "^2.2.2",
+    "vue-confetti-explosion": "^1.0.1",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

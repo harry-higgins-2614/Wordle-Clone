@@ -5,6 +5,8 @@ export const useStore = defineStore('main', {
 
     state: () => {
         const word = getWord();
+
+        console.log(word);
         return { 
             usedLetters: [],
             word: word

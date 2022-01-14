@@ -4,7 +4,7 @@ import App from './App.vue'
 import { routes } from './routes.js'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import VueConfetti from "vue-confetti"
+
 
 const app = createApp(App)
 
@@ -13,7 +13,6 @@ const router = createRouter({
   routes,
 })
 
-app.use(VueConfetti)
 app.use(router)
 app.use(createPinia())
 app.mount('#app')

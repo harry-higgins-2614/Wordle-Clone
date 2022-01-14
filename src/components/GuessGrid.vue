@@ -8,6 +8,7 @@ import GuessRow from "./GuessRow.vue"
 import {useStore} from "@/store"
 import { mapStores, mapWritableState, mapActions} from "pinia"
 
+
 export default { 
     components: {GuessRow},
     emits: ["correct"],
