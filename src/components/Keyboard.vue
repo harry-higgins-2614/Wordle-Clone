@@ -1,5 +1,5 @@
 <template>
-<div class="mx-auto md:w-1/3">
+<div class="mx-auto md:w-1/3 sticky bottom-0 bg-gray-100 pt-1 pb-1 border-t-2 border-gray-500">
     <div v-for="(row,rowIndex) in rows" :key="row" class="flex flex-row flex-nowrap mt-1 items-center justify-around ">
         <div v-for="(key,keyIndex) in row" :key="key" class="w-100">
             <div v-if="rowIndex == 2 && keyIndex == 0" 
