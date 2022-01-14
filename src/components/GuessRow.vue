@@ -32,7 +32,7 @@ export default {
             this.locked = true;
             
 
-            this.invalid = await validateWord(this.guess);
+            this.invalid = await validateWord(this.guess.join(""));
 
             if (this.invalid) {          
              this.$emit('locked',  this.guess.join("")); 
