@@ -3,7 +3,7 @@ import {getWord } from "./WordService"
 
 export const useStore = defineStore('main', { 
 
-    state: () => {
+    state: async () => {
         const word = getWord().then(d => {
             console.log(d);
             return d.data
@@ -11,7 +11,7 @@ export const useStore = defineStore('main', {
         
         return { 
             usedLetters: [],
-            word: word
+            word: await word
         }
     }
 })
