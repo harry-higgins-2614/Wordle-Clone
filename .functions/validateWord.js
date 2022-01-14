@@ -9,13 +9,16 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
       };
       
+      console.log(event);
       const { word } = event.queryStringParameters;
+
+      var valid = dat.includes(word)
 
     if (event.httpMethod !== "POST") { 
         return { 
             statusCode: 200,
             headers: headers,
-            body: dat.includes(word)
+            body: valid.toString()
         };
     }
   } catch (error) {

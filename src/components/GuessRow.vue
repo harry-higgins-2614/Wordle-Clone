@@ -31,7 +31,6 @@ export default {
         async validateGuess() { 
             this.locked = true;
             
-
             this.invalid = await validateWord(this.guess.join(""));
 
             if (this.invalid) {          
