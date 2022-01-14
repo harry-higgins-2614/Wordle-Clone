@@ -10,6 +10,7 @@ import { mapStores, mapWritableState, mapActions} from "pinia"
 
 export default { 
     components: {GuessRow},
+    emits: ["correct"],
     data() { 
         return { 
             activeGuessRow: 1
@@ -21,11 +22,13 @@ export default {
         ...mapWritableState(useStore, ['usedLetters', 'word'])
     },
     methods: { 
-        registerLocked(guess) { 
-            if (guess.toUpperCase() == this.word)
+        async registerLocked(guess) { 
+            if (guess.toUpperCase() == await this.word)
             {
-                console.log("YOU GOT IT!");
+                // Trigger confetti
+                this.$emit("correct", this.activeGuessRow);
                 return;
+
             }
             this.activeGuessRow++
         }

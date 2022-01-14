@@ -9,8 +9,6 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
       };
       
-    console.log(dat.length);
-
     const index = Math.floor(Math.random() * dat.length);
 
     if (event.httpMethod !== "POST") { 
