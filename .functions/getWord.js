@@ -2,11 +2,24 @@ const dat = require("./lengthWordList.json")
 
 exports.handler = async (event, context) => {
   try {
+
+    const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+      };
+      
     console.log(dat.length);
 
     const index = Math.floor(Math.random() * dat.length);
 
-    return { statusCode: 200, body: dat[index]  };
+    if (event.httpMethod !== "POST") { 
+        return { 
+            statusCode: 200,
+            headers: headers,
+            body: dat[index]  
+        };
+    }
   } catch (error) {
     console.log(error);
     return {
