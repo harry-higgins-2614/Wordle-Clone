@@ -8,7 +8,9 @@ export const useStore = defineStore('main', {
 
         return { 
             usedLetters: [],
-            word: word
+            word: word,
+            showToast: false,
+            toastData: {}
         }
     }
 })

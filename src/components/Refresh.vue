@@ -1,5 +1,5 @@
 <template>
-<div class="absolute top-0 right-12 h-12 w-12 bg-gray-200 opacity-40 md:opacity-100 flex flex-row items-center justify-center z-10"
+<div class="absolute top-0 right-12 h-12 w-12 bg-gray-200 opacity-40 md:opacity-100 flex flex-row items-center justify-center z-10 cursor-pointer"
 @click="refresh()"
 >
 <unicon name="redo" fill="royalblue" />

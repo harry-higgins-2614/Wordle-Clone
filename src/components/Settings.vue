@@ -1,5 +1,5 @@
 <template>
-<div class="absolute top-0 right-0 h-12 w-12 bg-gray-200 opacity-40 md:opacity-100 flex flex-row items-center justify-center z-10 isolate"
+<div class="absolute top-0 right-0 h-12 w-12 bg-gray-200 opacity-40 md:opacity-100 flex flex-row items-center justify-center z-10 isolate cursor-pointer"
 @click="setOpenState(true)"
 >
 <unicon name="setting" fill="royalblue" />
@@ -20,10 +20,17 @@
 </div>
 </div>
 
-<div class="self-end text-sm mr-2 mb-2 justify-self-end">
+<div class="self-end flex flex-row justify-around items-center w-full text-sm">
+<div class="inline text-xs">
+    Made By Harry Higgins
+</div>
+
+<div class="inline p-0">
 Click off to <span v-if="cheat == ''">close</span><span v-else>refresh</span>.
 </div>
 </div>
+</div>
+
 
 </div>
 

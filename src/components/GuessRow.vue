@@ -52,12 +52,14 @@ export default {
             this.guess.forEach((letter, index) => { 
                 if (letter.toUpperCase() == word[index].toUpperCase()) { 
                     this.status.push(["bg-green-300","text-gray-700", "animate__animated animate__flipInX"]);
+                    this.usedLetters.push({letter: letter, state: 'correct'})
                 }
                 else if (word.toUpperCase().includes(letter.toUpperCase())) { 
                     this.status.push(["bg-yellow-200","text-gray-600",  "animate__animated animate__flipInX"])
+                    this.usedLetters.push({letter: letter, state: 'inword'})
                 } else { 
                     this.status.push(["bg-gray-500", "text-gray-300", "animate__animated animate__flipInX"])
-                       this.usedLetters.push(letter)
+                       this.usedLetters.push({letter: letter, state: 'incorrect'})
                 }
             });
              this.$emit('locked',  this.guess.join(""));

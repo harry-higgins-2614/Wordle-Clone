@@ -1,5 +1,5 @@
 <template>
-<div class="mx-auto md:w-1/3 sticky bottom-0 bg-gray-100 pt-1 pb-1 border-t-2 border-gray-500">
+<div class="mx-auto md:w-1/3 md:relative sticky md:bottom-[unset] bottom-0 md:bg-white bg-gray-100 pt-1 pb-1 md:border-t-0 border-t-2 border-gray-500">
     <div v-for="(row,rowIndex) in rows" :key="row" class="flex flex-row flex-nowrap mt-1 items-center justify-around ">
         <div v-for="(key,keyIndex) in row" :key="key" class="w-100">
             <div v-if="rowIndex == 2 && keyIndex == 0" 
@@ -14,8 +14,8 @@
             >
                 <unicon name="cancel" class="rotate-180" fill="currentColor" />
             </div>
-            <div v-else class="h-12 min-w-[2rem] w-fit bg-gray-200 flex flex-col items-center justify-center text-gray-800"
-            :class="usedLetters?.includes(key) ? 'bg-gray-600' : ''"
+            <div v-else class="h-12 min-w-[2rem] w-fit  flex flex-col items-center justify-center"
+            :class="letterClass(key)"
             @click="input(key)"
             >
                 {{key}}
@@ -40,11 +40,27 @@ export default {
     },
     computed: {
         ...mapStores(useStore),
-        ...mapState(useStore, ['usedLetters'])
+        ...mapState(useStore, ['usedLetters']),
+        
     },
     methods: { 
         input(key) { 
             dispatchEvent(new KeyboardEvent('keydown',{'key':key}));
+        },
+        letterClass(letter) { 
+            switch (this.usedLetters.filter(e => e.letter == letter)[0]?.state) { 
+                case 'correct':
+                return "bg-green-300 text-gray-700"
+                break;
+                case 'incorrect':
+                return "bg-gray-500 text-gray-300"
+                break;
+                case 'inword':
+                return "bg-yellow-200 text-gray-600"
+                break;
+                default:
+                return 'bg-gray-200 text-gray-800'
+            }
         }
     },
     mounted() { 
