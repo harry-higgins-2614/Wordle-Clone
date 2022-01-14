@@ -32,12 +32,8 @@ export default {
             this.$emit('locked',  this.guess.join(""));
             this.status = [];
 
-            const word = this.word;
-            console.log(word, this.word);
+            const word = await this.word;
             this.guess.forEach((letter, index) => { 
-                
-                console.log(word)
-
                 if (letter.toUpperCase() == word[index].toUpperCase()) { 
                     this.status.push("bg-green-300");
                 }
@@ -61,9 +57,6 @@ export default {
                 return;
             }
 
-            if (this.usedLetters?.indexOf(e.key.toUpperCase()) > -1) { 
-                return;
-            }
 
             if (this.guess.length >= 5 && e.key != "Enter") { 
                 return;
