@@ -13,3 +13,6 @@
   for = "/*"
   [headers.values]
     Permissions-Policy = "interest-cohort=()"
+
+  [functions]
+  directory = ".functions"
