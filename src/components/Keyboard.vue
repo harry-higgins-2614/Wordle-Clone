@@ -1,5 +1,5 @@
 <template>
-<div class="mx-auto md:w-1/3 md:relative sticky md:bottom-[unset] bottom-0 md:bg-white bg-gray-100 pt-1 pb-1 md:border-t-0 border-t-2 border-gray-500">
+<div class="mx-auto md:w-1/3 md:relative sticky md:bottom-[unset] bottom-0 md:bg-white bg-gray-100 pt-1 pb-1 md:border-t-0 md:border-b-0 border-b-2 border-t-2 border-gray-500">
     <div v-for="(row,rowIndex) in rows" :key="row" class="flex flex-row flex-nowrap mt-1 items-center justify-around ">
         <div v-for="(key,keyIndex) in row" :key="key" class="w-100">
             <div v-if="rowIndex == 2 && keyIndex == 0" 
@@ -48,7 +48,9 @@ export default {
             dispatchEvent(new KeyboardEvent('keydown',{'key':key}));
         },
         letterClass(letter) { 
-            switch (this.usedLetters.filter(e => e.letter == letter)[0]?.state) { 
+            var usedLettersFiltered = this.usedLetters.filter(e => e.letter == letter);
+
+            switch (usedLettersFiltered[usedLettersFiltered.length -1]?.state) { 
                 case 'correct':
                 return "bg-green-300 text-gray-700"
                 break;

@@ -10,7 +10,8 @@ export const useStore = defineStore('main', {
             usedLetters: [],
             word: word,
             showToast: false,
-            toastData: {}
+            toastData: {},
+            wordLength: 5
         }
     }
 })

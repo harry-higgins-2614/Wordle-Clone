@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-row items-center justify-around w-100 md:w-1/3 md:mx-auto space-x-1" :class="!valid ? 'animate__animated animate__shakeX' : ''">
-        <div v-for="index in 5" :key="index" class="h-24 md:w-18 w-1/5 bg-gray-300 flex flex-col items-center justify-center text-4xl text-gray-800"
+        <div v-for="index in wordLength" :key="index" class="h-20 md:h-24md:w-18 w-1/5 bg-gray-300 flex flex-col items-center justify-center text-4xl text-gray-800"
         :class="[status[index-1]]" :style="{'animation-delay': (index-1)/6 + 's'}">
             {{ guess[index-1] }}
         </div>
@@ -9,7 +9,7 @@
 <script>
 import {useStore} from "@/store"
 import { mapStores, mapWritableState, mapActions} from "pinia"
-import { validateWord } from "@/WordService"
+import { getWord, validateWord } from "@/WordService"
 
 export default {
     props: ["active"],
@@ -22,10 +22,20 @@ export default {
             valid:true
         }
     },
-    emits: ["locked"], 
+    watch: { 
+        async wordLength() { 
+            if (this.active) { 
+            this.word = await getWord(this.wordLength);
+            }
+            this.reset();
+            this.usedLetters = [];
+            this.$emit("reset");
+        }
+    },
+    emits: ["locked","reset"], 
     computed: { 
          ...mapStores(useStore),
-        ...mapWritableState(useStore, ['usedLetters', 'word'])
+        ...mapWritableState(useStore, ['usedLetters', 'word', 'wordLength'])
     },
     methods: {
         reset() { 
@@ -36,7 +46,7 @@ export default {
         },
         async validateGuess() { 
             this.locked = true;
-            this.valid = await validateWord(this.guess.join(""));
+            this.valid = await validateWord(this.guess.join(""), this.wordLength);
 
             if (!this.valid) {   
                 setTimeout(() => {
@@ -59,7 +69,7 @@ export default {
                     this.usedLetters.push({letter: letter, state: 'inword'})
                 } else { 
                     this.status.push(["bg-gray-500", "text-gray-300", "animate__animated animate__flipInX"])
-                       this.usedLetters.push({letter: letter, state: 'incorrect'})
+                    this.usedLetters.push({letter: letter, state: 'incorrect'})
                 }
             });
              this.$emit('locked',  this.guess.join(""));
@@ -76,13 +86,16 @@ export default {
                 return;
             }
 
-            if (this.guess.length >= 5 && e.key.toUpperCase() != "ENTER") { 
+            if (this.guess.length >= this.wordLength && e.key.toUpperCase() != "ENTER") { 
                 return;
             }
 
+            console.log(this.guess.length, this.wordLength)
+
             if (this.isLetter(e.key)) { 
                 this.guess.push(e.key.toUpperCase());
-            } else if (this.guess.length == 5 && e.key.toUpperCase() == "ENTER") { 
+            } 
+            else if (this.guess.length == this.wordLength && e.key.toUpperCase() == "ENTER") { 
                 this.validateGuess();
             }
 

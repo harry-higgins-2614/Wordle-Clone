@@ -1,9 +1,8 @@
 <template>
-<transition name="fade" appear>
-<div class="absolute right-0 left-0 mx-auto top-1/3 h-32 bg-red-400 w-1/4" v-if="showToast">
-
+<div class="absolute right-0 left-0 mx-auto md:top-1/3 top-1/4 rounded-lg h-32 bg-white md:w-1/4  w-1/2 z-30">
+<slot>
+</slot>
 </div>
-</transition>
 </template>
 <style scoped>
 .fade-enter-active, .fade-leave-active {
@@ -17,6 +16,7 @@ import {useStore} from "@/store"
 import { mapStores, mapWritableState, mapActions} from "pinia"
 
 export default { 
+    props: ["duration"],
     data() { 
         return { 
 
@@ -24,17 +24,12 @@ export default {
     },
     computed: {       
         ...mapStores(useStore),
-        ...mapWritableState(useStore, ['showToast','toastData'])
+        ...mapWritableState(useStore, [])
     },
     methods: { 
 
     },
     mounted() { 
-        setTimeout(() => { 
-
-
-            this.showToast = true
-        }, 1200);
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col space-y-1">
-        <guess-row v-for="index in 6" :key="index" @locked="registerLocked" :active="activeGuessRow == index"></guess-row>      
+    <div class="flex flex-col space-y-1 mb-8">
+        <guess-row v-for="index in 6" :key="index" @locked="registerLocked" @reset="activeGuessRow = 1" :active="activeGuessRow == index"></guess-row>      
     </div>
 </template>
 <script>
@@ -11,7 +11,7 @@ import { mapStores, mapWritableState, mapActions} from "pinia"
 
 export default { 
     components: {GuessRow },
-    emits: ["correct"],
+    emits: ["correct","gameOver"],
     data() { 
         return { 
             activeGuessRow: 1,
@@ -19,7 +19,6 @@ export default {
         }
     },
     computed: {
-
          ...mapStores(useStore),
         ...mapWritableState(useStore, ['usedLetters', 'word'])
     },
@@ -31,6 +30,10 @@ export default {
                 this.$emit("correct", this.activeGuessRow);
                 return;
 
+            }
+            if (this.activeGuessRow == 6) { 
+                this.$emit("gameOver", await this.word);
+                return;
             }
             this.activeGuessRow++
         },
