@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
 
     const index = Math.floor(Math.random() * dat.length);
 
-    return { statusCode: 200, body: data[index]  };
+    return { statusCode: 200, body: dat[index]  };
   } catch (error) {
     console.log(error);
     return {
