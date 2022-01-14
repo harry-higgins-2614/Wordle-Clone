@@ -16,3 +16,4 @@
 
   [functions]
   directory = ".functions"
+  included_files = [".functions/**.json"]
