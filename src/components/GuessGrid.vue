@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col mt-12 space-y-10">
+    <div class="flex flex-col space-y-1">
         <guess-row v-for="index in 6" :key="index" @locked="registerLocked" :active="activeGuessRow == index"></guess-row>      
     </div>
 </template>
@@ -10,11 +10,12 @@ import { mapStores, mapWritableState, mapActions} from "pinia"
 
 
 export default { 
-    components: {GuessRow},
+    components: {GuessRow },
     emits: ["correct"],
     data() { 
         return { 
-            activeGuessRow: 1
+            activeGuessRow: 1,
+            isOpen: true
         }
     },
     computed: {
@@ -32,6 +33,9 @@ export default {
 
             }
             this.activeGuessRow++
+        },
+        setIsOpen(value) { 
+            this.isOpen = value;
         }
     }
 }
