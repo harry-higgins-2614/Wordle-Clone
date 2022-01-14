@@ -26,17 +26,22 @@ export default {
         ...mapWritableState(useStore, ['usedLetters', 'word'])
     },
     methods: {
-        validateGuess() { 
+        async validateGuess() { 
             this.locked = true;
 
             this.$emit('locked',  this.guess.join(""));
             this.status = [];
+
+            const word = await this.word;
+            
             this.guess.forEach((letter, index) => { 
-                console.log(this.word, this.word[index])
-                if (letter.toUpperCase() == this.word[index].toUpperCase()) { 
+                
+                console.log(word)
+
+                if (letter.toUpperCase() == word[index].toUpperCase()) { 
                     this.status.push("bg-green-300");
                 }
-                else if (this.word.toUpperCase().includes(letter.toUpperCase())) { 
+                else if (word.toUpperCase().includes(letter.toUpperCase())) { 
                     this.status.push("bg-yellow-300")
                 } else { 
                     this.status.push("bg-gray-500")
@@ -56,7 +61,7 @@ export default {
                 return;
             }
 
-            if (this.usedLetters?.indexOf(e.key.toUpperCase()) > -1) { 
+            if (this.usedLetters.indexOf(e.key.toUpperCase()) > -1) { 
                 return;
             }
 
