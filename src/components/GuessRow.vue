@@ -33,7 +33,7 @@ export default {
             this.status = [];
 
             const word = await this.word;
-            
+
             this.guess.forEach((letter, index) => { 
                 
                 console.log(word)
@@ -61,7 +61,7 @@ export default {
                 return;
             }
 
-            if (this.usedLetters.indexOf(e.key.toUpperCase()) > -1) { 
+            if (this.usedLetters?.indexOf(e.key.toUpperCase()) > -1) { 
                 return;
             }
 
