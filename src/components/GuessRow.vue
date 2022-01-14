@@ -56,7 +56,7 @@ export default {
                 return;
             }
 
-            if (this.usedLetters.indexOf(e.key.toUpperCase()) > -1) { 
+            if (this.usedLetters?.indexOf(e.key.toUpperCase()) > -1) { 
                 return;
             }
 
