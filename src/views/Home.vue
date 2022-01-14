@@ -12,10 +12,6 @@ const triggerCelebration = async function(tries) {
   visible.value = true;
   console.log(tries);
 }
-
-
-
-
   const visible = ref(false);
 
 </script>

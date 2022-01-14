@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-row items-center justify-around mx-auto" style="width: 25%">
+    <div class="flex flex-row items-center justify-around mx-auto" style="width: 25%" :class="active && invalid ? 'animate__animated animate__shakeX' : ''">
         <div v-for="index in 5" :key="index" class="h-16 w-12 bg-gray-300 rounded-lg border border-gray-500 shadow-md flex flex-col items-center justify-center text-4xl text-gray-800"
-        :class="status[index-1]">
+        :class="[status[index-1]]">
             {{ guess[index-1] }}
         </div>
     </div>
@@ -9,6 +9,7 @@
 <script>
 import {useStore} from "@/store"
 import { mapStores, mapWritableState, mapActions} from "pinia"
+import { validateWord } from "@/WordService"
 
 export default {
     props: ["active"],
@@ -17,7 +18,8 @@ export default {
             complete: false,
             guess: [],
             status: [],
-            locked: false
+            locked: false,
+            invalid:false
         }
     },
     emits: ["locked"], 
@@ -28,8 +30,15 @@ export default {
     methods: {
         async validateGuess() { 
             this.locked = true;
+            
 
-            this.$emit('locked',  this.guess.join(""));
+            this.invalid = await validateWord(this.guess);
+
+            if (this.invalid) {          
+             this.$emit('locked',  this.guess.join("")); 
+                return;
+            }
+           
             this.status = [];
 
             const word = await this.word;
@@ -44,6 +53,7 @@ export default {
                        this.usedLetters.push(letter)
                 }
             });
+             this.$emit('locked',  this.guess.join(""));
         },
         isLetter(str) {
         return str.length === 1 && str.match(/[a-z]/i);
