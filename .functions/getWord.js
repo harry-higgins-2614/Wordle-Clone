@@ -1,9 +1,8 @@
-const fs = require("fs");
+const dat = require("./lengthWordList.json")
 
 exports.handler = async (event, context) => {
   try {
-    const response = await fs.readFile("./lengthWordList.json");
-    const data = await JSON.parse(response);
+    const data = await JSON.parse(dat);
 
     const index = Math.floor(Math.random() * data.length);
 
