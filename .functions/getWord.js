@@ -2,9 +2,9 @@ const dat = require("./lengthWordList.json")
 
 exports.handler = async (event, context) => {
   try {
-    const data = await JSON.parse(dat);
+    console.log(dat.length);
 
-    const index = Math.floor(Math.random() * data.length);
+    const index = Math.floor(Math.random() * dat.length);
 
     return { statusCode: 200, body: data[index]  };
   } catch (error) {
