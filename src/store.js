@@ -4,9 +4,9 @@ import {getWord } from "./WordService"
 export const useStore = defineStore('main', { 
 
     state: () => {
-        const word = getWord();
-
+        
         const length = localStorage.getItem('app.wordLength') ?? 5;
+        const word = getWord(length);
 
         return { 
             usedLetters: [],
