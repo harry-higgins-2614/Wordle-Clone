@@ -1,5 +1,5 @@
 <template>
-<div class="absolute right-0 left-0 mx-auto md:top-1/3 top-1/4 rounded-lg h-32 bg-white md:w-1/4  w-1/2 z-30">
+<div class="absolute right-0 left-0 mx-auto md:top-1/3 top-1/4 rounded-lg md:h-32 bg-white md:w-1/4  z-30 min-h-fit h-1/3 w-2/3">
 <slot>
 </slot>
 </div>

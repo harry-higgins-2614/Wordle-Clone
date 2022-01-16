@@ -16,10 +16,10 @@
 <h1 class="text-xl mt-2">Power Ups</h1>
 
 <div @click="revealLetter()">
-    Reveal Letter
+    Reveal Letter (-100 points)
 </div>
 <div @click="removeLetter()">
-    Remove incorrect letter
+    Remove incorrect letter (-20 points)
 </div>
 <div>
 </div>
@@ -49,17 +49,24 @@ import { mapStores, mapWritableState, mapActions} from "pinia"
 
 
 export default { 
+    props: ["score"],
     data() { 
         return { 
             open: false,
-            cheat: ''
+            cheat: '',
         }
     },
+    emits: ["scoreUpdated"],
     computed: { 
         ...mapWritableState(useStore, ['word','usedLetters','usedCheats','activeGuessRow', 'guesses','revealedLetters'])
     },
    methods: { 
        async revealLetter() { 
+
+           if (this.score < 100) { 
+               return
+           };
+
            this.usedCheats = true;
            var word  = await this.word;
             var revealed = false;
@@ -75,6 +82,7 @@ export default {
                         this.revealedLetters.push({letter:letter, index: i});
 
                         revealed = true;
+                        this.$emit('scoreUpdated', parseInt(this.score) - 100);
                     }
                 }
             }
@@ -83,6 +91,10 @@ export default {
          this.cheat = await this.word
      },
        async removeLetter() { 
+           if (this.score < 20) { 
+               return
+           }
+
            this.usedCheats = true;
            var word = await this.word;
 
@@ -99,8 +111,8 @@ export default {
             var removeThis = candidates[rand];
 
             this.usedLetters.push({letter: removeThis, state: "incorrect"});
-
-
+            console.log(this.score);
+            this.$emit('scoreUpdated', parseInt(this.score) - 20);
        },
        setOpenState(value) { 
            
