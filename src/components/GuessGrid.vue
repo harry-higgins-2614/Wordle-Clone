@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col space-y-1 mb-8">
+    <div class="flex flex-col space-y-1 mb-24">
         <guess-row v-for="index in 6" :key="index" @locked="registerLocked" @reset="activeGuessRow = 1" :active="activeGuessRow == index"></guess-row>      
     </div>
 </template>
