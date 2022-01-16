@@ -14,7 +14,7 @@ import {useStore} from "@/store"
 
 const store = useStore();
 
-var points = parseInt(localStorage.getItem('app.points')) ?? 0;
+var points = isNaN(parseInt(localStorage.getItem('app.points'))) ? 0 : parseInt(localStorage.getItem('app.points'));
 
 const score = ref(points);
 
