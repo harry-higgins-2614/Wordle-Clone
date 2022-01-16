@@ -20,8 +20,6 @@ export async function getWord(wordLength = 5) {
     var length = wordList.length;
 
     var rand = Math.floor(Math.random() * length);
-
-    console.log(wordList[rand]);
     return wordList[rand]
 }
 

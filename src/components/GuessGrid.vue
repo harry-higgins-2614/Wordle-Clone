@@ -14,13 +14,12 @@ export default {
     emits: ["correct","gameOver"],
     data() { 
         return { 
-            activeGuessRow: 1,
             isOpen: true
         }
     },
     computed: {
          ...mapStores(useStore),
-        ...mapWritableState(useStore, ['usedLetters', 'word'])
+        ...mapWritableState(useStore, ['usedLetters', 'word', 'activeGuessRow'])
     },
     methods: { 
         async registerLocked(guess) { 

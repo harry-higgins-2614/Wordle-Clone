@@ -2,7 +2,7 @@
     <div class="flex flex-row items-center justify-around w-100 md:w-1/3 md:mx-auto space-x-1" :class="!valid ? 'animate__animated animate__shakeX' : ''">
         <div v-for="index in wordLength" :key="index" class="h-20 md:h-24md:w-18 w-1/5 bg-gray-300 flex flex-col items-center justify-center text-4xl text-gray-800"
         :class="[status[index-1]]" :style="{'animation-delay': (index-1)/6 + 's'}">
-            {{ guess[index-1] }}
+            <span>{{ guess[index-1] }}</span>
         </div>
     </div>
 </template>
@@ -24,6 +24,7 @@ export default {
     },
     watch: { 
         async wordLength() { 
+            localStorage.setItem('app.wordLength', this.wordLength);
             if (this.active) { 
             this.word = await getWord(this.wordLength);
             }
@@ -35,7 +36,7 @@ export default {
     emits: ["locked","reset"], 
     computed: { 
          ...mapStores(useStore),
-        ...mapWritableState(useStore, ['usedLetters', 'word', 'wordLength'])
+        ...mapWritableState(useStore, ['usedLetters', 'word', 'wordLength', 'activeGuessRow', 'guesses','revealedLetters'])
     },
     methods: {
         reset() { 
@@ -72,7 +73,11 @@ export default {
                     this.usedLetters.push({letter: letter, state: 'incorrect'})
                 }
             });
-             this.$emit('locked',  this.guess.join(""));
+
+            var input = this.guess.join("")
+            this.guesses.push(input);
+            this.guess = input;
+             this.$emit('locked',  input);
         },
         isLetter(str) {
         return str.length === 1 && str.match(/[a-z]/i);
@@ -87,15 +92,13 @@ export default {
             }
 
             if (this.guess.length >= this.wordLength && e.key.toUpperCase() != "ENTER") { 
-                return;
+                return; 
             }
-
-            console.log(this.guess.length, this.wordLength)
 
             if (this.isLetter(e.key)) { 
                 this.guess.push(e.key.toUpperCase());
             } 
-            else if (this.guess.length == this.wordLength && e.key.toUpperCase() == "ENTER") { 
+            else if (this.guess.length == this.wordLength && e.key.toUpperCase() == "ENTER" && this.active) { 
                 this.validateGuess();
             }
 

@@ -14,9 +14,9 @@ const router = createRouter({
 })
 
 import Unicon from 'vue-unicons'
-import { uniSetting, uniCancel, uniRedo,uniCornerDownLeft } from 'vue-unicons/dist/icons'
+import { uniSetting, uniCancel, uniRedo,uniCornerDownLeft, uniBolt, uniTrophy,uniTwitter } from 'vue-unicons/dist/icons'
 
-Unicon.add([uniSetting, uniCancel, uniRedo, uniCornerDownLeft])
+Unicon.add([uniSetting, uniCancel, uniRedo, uniCornerDownLeft, uniBolt, uniTrophy, uniTwitter])
 app.use(Unicon)
 app.use(router)
 app.use(createPinia())

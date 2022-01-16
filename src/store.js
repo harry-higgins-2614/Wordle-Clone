@@ -6,12 +6,18 @@ export const useStore = defineStore('main', {
     state: () => {
         const word = getWord();
 
+        const length = localStorage.getItem('app.wordLength');
+
         return { 
             usedLetters: [],
             word: word,
             showToast: false,
             toastData: {},
-            wordLength: 5
+            wordLength:  parseInt(length),
+            usedCheats: false,
+            activeGuessRow: 1,
+            guesses: [],
+            revealedLetters: []
         }
     }
 })
