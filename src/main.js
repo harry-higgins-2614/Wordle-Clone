@@ -17,6 +17,8 @@ import Unicon from 'vue-unicons'
 import { uniSetting, uniCancel, uniRedo,uniCornerDownLeft, uniBolt, uniTrophy,uniTwitter } from 'vue-unicons/dist/icons'
 
 Unicon.add([uniSetting, uniCancel, uniRedo, uniCornerDownLeft, uniBolt, uniTrophy, uniTwitter])
+
+app.config.devtools = true;
 app.use(Unicon)
 app.use(router)
 app.use(createPinia())
