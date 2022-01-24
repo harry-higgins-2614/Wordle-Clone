@@ -10,7 +10,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
     "pinia": "^2.0.9",
-    "vue": "^3.2.26",
+    "vue": "^3.2.29",
     "vue-confetti-explosion": "^1.0.1",
     "vue-router": "^4.0.12",
     "vue-unicons": "^3.3.1"
