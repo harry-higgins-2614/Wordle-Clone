@@ -9,7 +9,7 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
-    "pinia": "^2.0.9",
+    "pinia": "^2.0.19",
     "vue": "^3.2.37",
     "vue-confetti-explosion": "^1.0.1",
     "vue-router": "^4.0.12",
