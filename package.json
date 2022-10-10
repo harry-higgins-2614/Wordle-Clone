@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "axios": "^0.24.0",
+    "axios": "^1.1.2",
     "pinia": "^2.0.9",
     "vue": "^3.2.37",
     "vue-confetti-explosion": "^1.0.1",
